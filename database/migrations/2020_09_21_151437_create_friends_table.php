@@ -14,7 +14,9 @@ class CreateFriendsTable extends Migration
     public function up()
     {
         Schema::create('friends', function (Blueprint $table) {
+            $table->unsignedBigInteger('sender');
             $table->foreign('sender')->references('id')->on('users');
+            $table->unsignedBigInteger('receiver');
             $table->foreign('receiver')->references('id')->on('users');
             $table->primary(['sender', 'receiver']);
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');

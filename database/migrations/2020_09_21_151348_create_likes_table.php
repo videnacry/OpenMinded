@@ -14,7 +14,9 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
+            $table->unsignedBigInteger('author');
             $table->foreign('author')->references('id')->on('users');
+            $table->unsignedBigInteger('post');
             $table->foreign('post')->references('id')->on('posts');
             $table->primary(['author', 'post']);
             $table->timestamps();
