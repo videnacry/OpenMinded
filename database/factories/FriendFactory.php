@@ -14,6 +14,7 @@ class FriendFactory extends Factory
      * @var string
      */
     protected $model = Friend::class;
+
     private $records = [];
 
     /**

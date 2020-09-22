@@ -6,7 +6,6 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class LikeFactory extends Factory
 {
@@ -17,6 +16,8 @@ class LikeFactory extends Factory
      */
     protected $model = Like::class;
 
+    private $records = [];
+
     /**
      * Define the model's default state.
      *
@@ -24,12 +25,17 @@ class LikeFactory extends Factory
      */
     public function definition()
     {
-        $user = User::inRandomOrder()->first();
-        $post = Post::inRandomOrder()->first();
+        do {
+            $user_id = User::inRandomOrder()->first()->id;
+            $post_id = Post::inRandomOrder()->first()->id;
+            $needle = $user_id . '_' . $post_id;
+        } while (in_array($needle, $this->records));
+
+        array_push($this->records, $needle);
 
         return [
-            'author' => $user->id,
-            'post' => $post->id,
+            'author' => $user_id,
+            'post' => $post_id,
         ];
     }
 }
