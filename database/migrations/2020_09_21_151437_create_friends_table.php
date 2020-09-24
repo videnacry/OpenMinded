@@ -19,8 +19,7 @@ class CreateFriendsTable extends Migration
             $table->unsignedBigInteger('receiver');
             $table->foreign('receiver')->references('id')->on('users');
             $table->primary(['sender', 'receiver']);
-            // 0: pending; 1: approved; 2: rejected
-            $table->integer('status')->default(0);
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
