@@ -15,8 +15,19 @@
 
         <!--Specific stylesheet-->
         @yield('style')
+
+        <style>
+            .shadow-outer{box-shadow: 0 0 3px 3px gray;}
+            .shadow-red{box-shadow: 0 0 3px 3px red;}
+            .shadow-yellow{box-shadow: 0 0 3px 3px yellow;}
+            .shadow-blue{box-shadow: 0 0 3px 3px blue;}
+            .shadow-green{box-shadow: 0 0 3px 3px green;}
+            .shadow-black{box-shadow: 0 0 6px 12px black;}
+            .shadow-inner{box-shadow: inset 0 0 3px 3px gray;}}
+            button *{text-shadow: 1px 1px green;}
+        </style>
     </head>
-    <body class="font-sans antialiased bg-fixed">
+    <body class="font-sans antialiased bg-fixed bg-cover">
     
         @yield('content')
         <script src="{{asset('js/app.js')}}"></script>
