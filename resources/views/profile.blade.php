@@ -17,7 +17,11 @@
 @endsection
 
 @section('content')
-        @yield('header-content')
-        @yield('summery-content')
-        @yield('publication-content')
+    @yield('header-content')
+    @yield('summery-content')
+    @yield('publication-content')
+@endsection
+
+@section('content-script')
+    <script src="public/js/profileWall.js" defer></script>
 @endsection
