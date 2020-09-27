@@ -7,7 +7,7 @@
 </style>
 @endsection
 @section('post-content')
-<div class="flex min-h-screen justify-center flex-col antialized text-gray-300 absolute w-screen inset-0 hidden">
+<div id="post" class="flex min-h-screen justify-center flex-col antialized text-gray-300 absolute w-screen inset-0 hidden">
     <div class="flex justify-center">
         <article class="post w-1/2 bg-fixed bg-cover px-20">
             <header class="flex justify-between p-5">

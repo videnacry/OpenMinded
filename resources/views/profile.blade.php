@@ -3,6 +3,7 @@
 @include('user.header')
 @include('user.summery')
 @include('wall.publication')
+@include('wall.post')
 
 @section('style')
     <style>
@@ -14,12 +15,15 @@
     @yield('summery-style')
     <!-- Publication styles -->
     @yield('publication-style')
+    <!-- Post styles -->
+    @yield('post-style')
 @endsection
 
 @section('content')
     @yield('header-content')
     @yield('summery-content')
     @yield('publication-content')
+    @yield('post-content')
 @endsection
 
 @section('content-script')

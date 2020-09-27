@@ -4,5 +4,5 @@ axios.defaults.headers.common = {
 };
 console.log('a')
 document.getElementById('newPost').addEventListener('click',function(){
-    
+    document.getElementById('post').classList.toggle('hidden')
 })
