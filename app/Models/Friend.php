@@ -26,4 +26,6 @@ class Friend extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    protected $primaryKey = ['sender', 'receiver'];
+    public $incrementing = false;
 }
