@@ -1,3 +1,4 @@
+### laravel **schema** to manipulate **tables**
 ´´´php
 //We can drop columns in a table
 Schema:table('posts', function(Blueprint $table){
@@ -46,7 +47,7 @@ Schema::table('posts', function(Blueprint $table){
 ´´´
 ### Upload a file
 Upload a file with laravel is very easy, the html part is so similar to what we would have in a project without laravel, the only thing that would change is, here we add one line ! That is because Laravel has some security against ['CSRF'](), so the the *post* has a token wich must be declare in the *.blade.php* file, so you must put **@CSRF** inside the form you want to post.
-´´´php
+```html
 <?php
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -64,6 +65,21 @@ public function uploadPicture(Request $request){
     $request->validate([
         'image' => 'required|image|mimes:jpg,png,svg|max:2048'
     ])
-    $imageName = time() . $request->extension;
-    $request->move(public_path('images'), $imageName);
+    $imageName = time() . $request->image->extension;
+    $request->image->move(public_path('images'), $imageName);
 }
+```
+### Ajax with laravel
+As Laravel uses **CSRF**(CROSS-SITE REQUEST FORGERING) you must add an *CSRF token* in ajax posts wich you get from the server, to do that you can change the default header property of axios or add the header in every post.
+
+Remember you can only give the token from the server, so you can't change the script files but if you have the script on the .blade.php file, then you can directly add the token on the axios instead of another tag.
+```js
+//axios default header changed with script on the .blade.php
+axios.default.header.common= {
+    'x-csrf-token': "{{csrf_token()}}"
+}
+
+//axios header per post, within script file
+let data={username:'videnacry', text:'I heard an emotion was a bunch of energy you can use, even to change the emotion itself, to say it like that'}
+axios.post('add_post',data,{headers:{'x-csrf-token':document.querySelector('meta[name="crsf_token"]').getAttribute('content')}})
+```
