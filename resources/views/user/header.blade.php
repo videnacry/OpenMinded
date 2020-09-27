@@ -16,7 +16,7 @@
                 <img width="50px" src="{{asset('img/friends.png')}}"/>
                 <span class="text-gray-200 absolute top-2 left-0">Friends</span>
             </button>
-            <button class="shadow-outer my-1 mr-10 bg-orange-300 rounded-md border-gray-200 border-solid border-2 px-2">Post</button>
+            <button id="newPost" class="shadow-outer my-1 mr-10 bg-orange-300 rounded-md border-gray-200 border-solid border-2 px-2">Post</button>
         </div>
     </nav>
 @endsection

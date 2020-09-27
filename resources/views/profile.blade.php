@@ -23,5 +23,5 @@
 @endsection
 
 @section('content-script')
-    <script src="public/js/profileWall.js" defer></script>
+    <script src="{{asset('js/profileWall.js')}}" defer></script>
 @endsection

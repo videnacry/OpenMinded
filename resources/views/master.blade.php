@@ -31,6 +31,6 @@
     
         @yield('content')
         <script src="{{asset('js/app.js')}}"></script>
-        @yield('script-content')
+        @yield('content-script')
     </body>
 </html>
