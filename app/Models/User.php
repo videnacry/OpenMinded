@@ -58,4 +58,18 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Return the posts of an specific user
+     */
+    public function posts(){
+        return $this->hasMany('App\Models\Post');
+    }
+    
+    /**
+     * Return the friends rows related to an specific user
+     */
+    public function friends(){
+        return $this->hasMany('App\Models\Friend');
+    }
 }
