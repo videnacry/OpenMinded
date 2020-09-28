@@ -83,3 +83,9 @@ axios.default.header.common= {
 let data={username:'videnacry', text:'I heard an emotion was a bunch of energy you can use, even to change the emotion itself, to say it like that'}
 axios.post('add_post',data,{headers:{'x-csrf-token':document.querySelector('meta[name="crsf_token"]').getAttribute('content')}})
 ```
+### Jetstream profile images
+Jetstream upload the profile images inside **storage\app\public\profile-photos** so to access these photos you can **asset()** function but first you need to link this *storage* folder with *public* folder.
+```php
+//This command would create a copy of storage folder inside public
+php artisan storage:link
+```

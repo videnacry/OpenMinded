@@ -37,11 +37,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        $authorId = Auth::user()->id;
+        $author = Auth::user();
         $postText = $request['post-text'];
-        $post = Post::create(['author'=>$authorId, 'content'=>$postText]);
+        $post = Post::create(['author'=>$author->id, 'content'=>$postText]);
         $post->save();
-        echo json_encode(['author'=>$authorId, 'content'=>$postText]);
+        echo json_encode(['author'=>$author->name, 'content'=>$postText, 'authorImg' => asset('storage/'.$author->profile_photo_path)]);
     }
 
     /**
