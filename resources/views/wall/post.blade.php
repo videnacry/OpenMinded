@@ -29,7 +29,7 @@
                         <img class="bg-gray-100 rounded-sm" width="30px" src="https://icon-library.com/images/img-icon/img-icon-14.jpg"/>
                     </label>
                 </fieldset> 
-                <img width="100%" src="https://static.scientificamerican.com/blogs/cache/file/638FC5CE-96EC-46DA-AAC64985822092FE_source.jpg?w=590&h=800&BDB89ACC-71A2-463A-928419A181070C77"/>
+                <img id="img-preview" width="100%" src="https://static.scientificamerican.com/blogs/cache/file/638FC5CE-96EC-46DA-AAC64985822092FE_source.jpg?w=590&h=800&BDB89ACC-71A2-463A-928419A181070C77"/>
                 <footer class="mt-10 flex justify-end">
                     <button type="submit">POST</button>
                 </footer>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,7 +37,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        echo json_encode($_FILES);
+        $authorId = Auth::user()->id;
+        $postText = $request['post-text'];
+        $post = Post::create(['author'=>$authorId, 'content'=>$postText]);
+        $post->save();
+        echo json_encode(['author'=>$authorId, 'content'=>$postText]);
     }
 
     /**
