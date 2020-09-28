@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,4 @@ Route::get('/wall', function(){
     return view('wall');
 });
 
-Route::post('/post/create', function(){
-    echo 'got it';
-});
+Route::post('/post/create', [PostController::class, 'store']);
