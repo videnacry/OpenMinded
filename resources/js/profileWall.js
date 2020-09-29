@@ -70,6 +70,7 @@ axios.post('posts/username').then(function(res){
         let post = createPost(undefined, undefined, elem.content, author.name, author.profile_photo_path)
         post.addEventListener('dblclick',like)
         post.setAttribute('data-id',elem.id)
+        post.getElementsByTagName('span')[0].textContent = elem.likes_count
         document.getElementById('publications').prepend(post)
     }
 })
@@ -103,13 +104,16 @@ closeModal.onclick = function(e){
 }
 
 
+//-----------------------------------------LIKES-------------------------------------------------------
 
-
-//-----------------give like------------------
+/**
+ * Send the id of post to insert new id on DB, alse return likes count of the post
+ * @param {event} e 
+ */
 function like(e){
     let post = e.currentTarget
     let data = {post_id:post.getAttribute('data-id')}
     axios.post('likes/store', data).then(function(res){
-        console.log(res.data)
+        post.getElementsByTagName('span')[0].textContent = res.data
     })
 }

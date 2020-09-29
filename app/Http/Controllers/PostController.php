@@ -59,6 +59,9 @@ class PostController extends Controller
         foreach($users as $friend){
             $friend->posts = $friend->posts()->get();
             $friend->profile_photo_path = asset('storage/'.$friend->profile_photo_path);
+            foreach($friend->posts as $post){
+                $post->likes_count = $post->likes()->get()->count();
+            }
         }
         return $users;
     }
@@ -75,6 +78,9 @@ class PostController extends Controller
             $user = $userInstance->getByUsername($username);
         }
         $userPosts = Post::where('author', $user->id)->get();
+        foreach($userPosts as $post){
+            $post->likes_count = $post->likes()->get()->count();
+        }
         $user->profile_photo_path = asset('storage/'.$user->profile_photo_path);
         return json_encode(['posts'=>$userPosts, 'user'=>$user]);
     }

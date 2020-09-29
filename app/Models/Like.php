@@ -13,4 +13,8 @@ class Like extends Model
     public $incrementing = false;
 
     public $fillable = ['author', 'post'];
+
+    public function post(){
+        return $this->belongsTo('App\Models\Post', 'post');
+    }
 }

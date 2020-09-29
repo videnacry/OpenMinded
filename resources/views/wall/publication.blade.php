@@ -11,8 +11,9 @@
                 <p>Would the emotion give you thinks ?</p>
             </div>
         </button>
-        <article class="rounded-sm bg-red-300 w-2/12 p-2">
+        <article class="rounded-sm bg-red-300 w-2/12 p-2 relative">
             <img class="shadow-outer" src="{{asset('img/DoubleOdalis.png')}}">
+            <span class="left-3 bottom-3 absolute text-6x1 font-bold text-red-300"></span>
         </article>
     </div>
 </div>
