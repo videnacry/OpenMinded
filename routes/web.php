@@ -40,3 +40,6 @@ Route::post('/posts/username', [PostController::class, 'getByUsername']);
 
 //-----------------Get all posts with a content containing a text------------------
 Route::post('/posts/search', [PostController::class, 'getByText']);
+
+//-----------------Get users whose username match a text------------------
+Route::post('users/search', [UserController::class, 'getByText']);

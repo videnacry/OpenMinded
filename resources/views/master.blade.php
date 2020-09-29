@@ -27,6 +27,7 @@
             button *{text-shadow: 1px 1px green;}
             .profile-icon{width:3.5vw; height:3.5vw;}
             .found>*{z-index:20;}
+            .found{z-index:-1;}
         </style>
     </head>
     <body class="font-sans antialiased bg-fixed bg-cover">

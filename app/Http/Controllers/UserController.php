@@ -73,6 +73,17 @@ class UserController extends Controller
         return json_encode($friends);
     }
     
+    /**
+     * Gets users whose username match a text
+     * @param Request $request
+     */
+    public function getByText(Request $request){
+        $users = User::where('name','like','%'.$request->text.'%')->get();
+        foreach($users as $user){
+            $user->profile_photo_path = asset('storage/'.$user->profile_photo_path);
+        }
+        return $users;
+    }
 
     /**
      * Show the form for editing the specified resource.

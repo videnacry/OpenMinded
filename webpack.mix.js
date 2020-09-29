@@ -17,3 +17,5 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 mix.js('resources/js/profileWall.js', 'public/js')
+
+mix.js('resources/js/publicWall.js', 'public/js')
