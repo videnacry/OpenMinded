@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friend;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,16 +60,16 @@ class FriendController extends Controller
     }
 
     /**
-     * Gets friends ids by the user id
+     * Gets friends as users
      * @param int $id
      */
-    public function getIdsBySenderId(int $id){
-        $friends = Friend::where('sender', $id)->get();
-        $friendsIds = [];
+    public function getFriends(){
+        $friends = Friend::where('sender', Auth::user()->id)->get();
+        $users = [];
         foreach($friends as $friend){
-            array_push($friendsIds, $friend->id);
+            array_push($users, $friend->user);
         }
-        return $friendsIds;
+        return $users;
     }
 
     /**

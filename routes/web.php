@@ -47,3 +47,8 @@ Route::post('users/search', [UserController::class, 'getByText']);
 
 //-----------------Send friendship request------------------
 Route::post('friends/store', [FriendController::class, 'store']);
+
+//-----------------Get posts as json------------------
+Route::post('posts/friends', [PostController::class, 'getFriends']);
+
+Route::get('u', [PostController::class, 'getFriends']);

@@ -52,9 +52,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getFriends()
     {
-        //
+        $friendInstance = new friendController;
+        $users = $friendInstance->getFriends();
+        foreach($users as $friend){
+            $friend->posts = $friend->posts()->get();
+            $friend->profile_photo_path = asset('storage/'.$friend->profile_photo_path);
+        }
+        return $users;
     }
 
     /**

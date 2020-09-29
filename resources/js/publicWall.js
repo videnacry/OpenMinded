@@ -54,3 +54,38 @@ function addFriend(e){
         tar.style.display = 'none'
     })
 }
+
+/**
+ * Clones a post by class, fill it with new data and return it
+ * @param string proto_class
+ * @param string img_src
+ * @param string post_content
+ * @param string post_author
+ * @param string post_authorImg
+ */
+function createPost(protoClass='proto-post'
+    , imgSrc='https://static.scientificamerican.com/blogs/cache/file/638FC5CE-96EC-46DA-AAC64985822092FE_source.jpg?w=590&h=800&BDB89ACC-71A2-463A-928419A181070C770'
+    , postContent, authorUsername , authorImg){
+    let newPost = document.getElementsByClassName(protoClass)[0].cloneNode(true)
+    newPost.getElementsByTagName('img')[0].src = authorImg
+    newPost.getElementsByTagName('img')[1].src = imgSrc
+    newPost.getElementsByTagName('h1')[0].textContent = authorUsername
+    newPost.getElementsByTagName('p')[0].textContent = postContent
+    return newPost;
+}
+
+
+//-----------------show posts from everyone------------------
+
+axios.post('posts/friends').then(function(res){
+    let users = res.data
+    console.log(users)
+    for(let key in users){
+        for(let index in users[key].posts){
+            console.log()
+            let friendPost = createPost(undefined, undefined, users[key].posts[index].content, users[key].name, users[key].profile_photo_path)
+            console.log(friendPost)
+            document.getElementById('publications').prepend(friendPost)            
+        }
+    }
+})

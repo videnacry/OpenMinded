@@ -24,7 +24,7 @@ class Friend extends Model
      * Returns the user of an specific friendship
      */
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'receiver', 'id');
     }
     protected $primaryKey = ['sender', 'receiver'];
     public $incrementing = false;

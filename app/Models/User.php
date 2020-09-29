@@ -64,13 +64,13 @@ class User extends Authenticatable
      * Return the posts of an specific user
      */
     public function posts(){
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Post', 'author');
     }
     
     /**
      * Return the friends rows related to an specific user
      */
     public function friends(){
-        return $this->hasMany('App\Models\Friend');
+        return $this->hasMany('App\Models\Friend', 'receiver', 'id');
     }
 }

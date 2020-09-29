@@ -24,6 +24,7 @@
     @yield('header-content')
     <div id="close-modal" class="w-screen h-screen absolute hidden inset-0 z-10">
     </div>
+    <div id="publications"></div>
     @yield('post-content')
     @yield('publication-content')
 @endsection
