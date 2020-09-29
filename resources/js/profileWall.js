@@ -69,6 +69,7 @@ axios.post('posts/username').then(function(res){
         let author = res.data.user
         let post = createPost(undefined, undefined, elem.content, author.name, author.profile_photo_path)
         post.addEventListener('dblclick',like)
+        post.addEventListener('click', comments)
         post.setAttribute('data-id',elem.id)
         post.getElementsByTagName('span')[0].textContent = elem.likes_count
         document.getElementById('publications').prepend(post)
@@ -117,3 +118,11 @@ function like(e){
         post.getElementsByTagName('span')[0].textContent = res.data
     })
 }
+
+//-------------------------------------------COMMENTS----------------------------------------------------
+let commentModal = document.getElementById('comment-modal')
+function comments(e){
+    commentModal.style.backgroundImage = 'url("' + e.currentTarget.getElementsByTagName('img')[1].src + '")'
+    commentModal.classList.toggle('hidden')
+}
+document.getElementById('close-comment').onclick = ()=>commentModal.classList.toggle('hidden')

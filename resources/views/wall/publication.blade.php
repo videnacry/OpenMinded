@@ -17,4 +17,13 @@
         </article>
     </div>
 </div>
+<div id="comment-modal" class="hidden z-20 translate-t-l top-1/2 left-1/2 fixed bg-cover bg-center">
+    <div id="comments" class="w-full h-64 border-2 border-solid border-black-500 shadow-inner">
+        <span id="close-comment" class="text-red-800 shadow-negro text-4xl absolute right-5">
+            x
+        </span>
+    </div>
+    <input class="my-5 h-6 ml-3 rounded-full text-xs border-solid border-2 border-gray-400 p-1 w-48 flex flex-col bg-gray-100 placeholder-gray-500" placeholder="What are you looking for ?">
+    <button class="my-5 h-6 ml-3 bg-blue-200 rounded-md border-blue-200 border-solid border-2 px-2">Comment</button>
+</div>
 @endsection

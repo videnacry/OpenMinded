@@ -83,6 +83,7 @@ axios.post('posts/friends').then(function(res){
         for(let index in users[key].posts){
             let friendPost = createPost(undefined, undefined, users[key].posts[index].content, users[key].name, users[key].profile_photo_path)
             friendPost.addEventListener('dblclick', like)
+            friendPost.addEventListener('click', comments)
             friendPost.setAttribute('data-id', users[key].posts[index].id)
             friendPost.getElementsByTagName('span')[0].textContent = users[key].posts[index].likes_count
             document.getElementById('publications').prepend(friendPost)            
@@ -102,3 +103,12 @@ function like(e){
         post.getElementsByTagName('span')[0].textContent = res.data
     })
 }
+
+
+//------------------------------------------------------COMMENTS------------------------------------------
+let commentModal = document.getElementById('comment-modal')
+function comments(e){
+    commentModal.style.backgroundImage = 'url("' + e.currentTarget.getElementsByTagName('img')[1].src + '")'
+    commentModal.classList.toggle('hidden')
+}
+document.getElementById('close-comment').onclick = ()=>commentModal.classList.toggle('hidden')
