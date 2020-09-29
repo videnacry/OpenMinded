@@ -17,6 +17,7 @@ function search(e){
             let users = res.data
             for(let elem in users){
                 let profile = createProfile(undefined, users[elem].description, users[elem].name , users[elem].profile_photo_path)
+                profile.addEventListener('click', addFriend)
                 searcher.children[2].appendChild(profile)
             }
         })
@@ -42,4 +43,14 @@ newProfile.getElementsByTagName('img')[0].src = img
 newProfile.getElementsByTagName('h1')[0].textContent = username
 newProfile.getElementsByTagName('p')[0].textContent = description
 return newProfile;
+}
+
+//-----------addFriend function-----------
+function addFriend(e){
+    let tar = e.currentTarget;
+    let target = e.currentTarget.getElementsByTagName('h1')[0].textContent
+    axios.post('friends/store', {target: target}).then(function(res){
+        console.log(res.data)
+        tar.style.display = 'none'
+    })
 }

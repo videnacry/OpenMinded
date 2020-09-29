@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FriendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,6 @@ Route::post('/posts/search', [PostController::class, 'getByText']);
 
 //-----------------Get users whose username match a text------------------
 Route::post('users/search', [UserController::class, 'getByText']);
+
+//-----------------Send friendship request------------------
+Route::post('friends/store', [FriendController::class, 'store']);

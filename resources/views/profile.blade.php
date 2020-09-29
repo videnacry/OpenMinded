@@ -20,6 +20,8 @@
 @endsection
 
 @section('content')
+    <div id="close-modal" class="w-screen h-screen absolute hidden inset-0 z-10">
+    </div>
     @yield('header-content')
     @yield('summery-content')
     @yield('publication-content')
