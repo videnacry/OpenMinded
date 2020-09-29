@@ -37,3 +37,6 @@ Route::post('posts',[PostController::class,'store']);
 
 //-----------------Get all posts from the user logged------------------
 Route::post('/posts/username', [PostController::class, 'getByUsername']);
+
+//-----------------Get all posts with a content containing a text------------------
+Route::post('/posts/search', [PostController::class, 'getByText']);

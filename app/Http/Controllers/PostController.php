@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -70,6 +71,20 @@ class PostController extends Controller
         $userPosts = Post::where('author', $user->id)->get();
         $user->profile_photo_path = asset('storage/'.$user->profile_photo_path);
         return json_encode(['posts'=>$userPosts, 'user'=>$user]);
+    }
+
+    /**
+     * Get the posts in a json by a piece of text
+     * @param string $username
+     */
+    public function getByText(Request $request){
+        
+        $userPosts = Post::where('content', 'like', '%'. $request->text. '%')->get();
+        foreach($userPosts as $userPost){
+            $userPost->user = $userPost->user;
+            $userPost->user->profile_photo_path = asset('storage/'.$userPost->user->profile_photo_path);
+        }
+        return json_encode($userPosts);
     }
 
     /**

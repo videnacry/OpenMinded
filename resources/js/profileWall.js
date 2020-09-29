@@ -3,6 +3,8 @@ axios.defaults.headers.common = {
     'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 
+let closeModal = document.getElementById('close-modal')
+
 let postModel = document.getElementById('post')
 
 document.getElementById('newPost').addEventListener('click',function(){
@@ -38,7 +40,7 @@ document.getElementById('post-info').addEventListener('submit',function(e){
  * @param string post_author
  * @param string post_authorImg
  */
-function createPost(protoClass
+function createPost(protoClass='proto-post'
     , imgSrc='https://static.scientificamerican.com/blogs/cache/file/638FC5CE-96EC-46DA-AAC64985822092FE_source.jpg?w=590&h=800&BDB89ACC-71A2-463A-928419A181070C770'
     , postContent, authorUsername , authorImg){
     let newPost = document.getElementsByClassName(protoClass)[0].cloneNode(true)
@@ -63,7 +65,35 @@ axios.post('posts/username').then(function(res){
     for(let key in res.data.posts){
         let elem = res.data.posts[key]
         let author = res.data.user
-        let post = createPost('proto-post', undefined, elem.content, author.name, author.profile_photo_path)
+        let post = createPost(undefined, undefined, elem.content, author.name, author.profile_photo_path)
         document.getElementById('publications').prepend(post)
     }
 })
+
+//----------------------------Searcher-------------------------------------
+let searcher = document.getElementById('searcher')
+//----------search events--------------
+searcher.children[0].onchange = search
+
+searcher.children[1].onclick = search
+
+//-----------search function-----------
+function search(e){
+    closeModal.classList.toggle('hidden')
+    searcher.children[2].innerHTML = ""
+    axios.post('posts/search', {text: searcher.children[0].value}).then(function(res){
+        console.log(res.data)
+        let posts = res.data
+        for(let elem in res.data){
+            console.log(searcher)
+            let post = createPost(undefined, undefined, posts[elem].content, posts[elem].user.name , posts[elem].user.profile_photo_path)
+            searcher.children[2].appendChild(post)
+        }
+    })
+}
+
+//---------close search result--------
+closeModal.onclick = function(e){
+    e.currentTarget.classList.toggle('hidden')
+    searcher.children[2].textContent = ""
+}

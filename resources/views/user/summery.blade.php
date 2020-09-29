@@ -27,6 +27,8 @@
 @endsection
 
 @section('summery-content')
+    <div id="close-modal" class="w-screen h-screen absolute hidden inset-0 z-10">
+    </div>
     <section class="h-screen">
             <!-- <img class="traveler shadow-lg absolute inset-y-9/12 inset-x-4/12 rounded-full border-solid border-2 border-gray-100" width="100px" src="{{asset('img/god1.jpg')}}">
             <img class="traveler shadow-lg absolute inset-y-2/12 inset-x-6/12  rounded-full border-solid border-2 border-gray-100" width="100px" src="{{asset('img/LionDark.gif')}}">

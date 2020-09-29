@@ -5,7 +5,7 @@
 <div id="publications">
     <div class="proto-post">
         <button class="flex">
-            <img class="shadow-inner rounded-full w-10 h-10" src="{{asset('img/GranadaCat.jpg')}}">
+            <img class="shadow-inner rounded-full profile-icon m-auto" src="{{asset('img/GranadaCat.jpg')}}">
             <div class="text-blue-400">
                 <h1 class="w-2/12">Videnacry</h1>
                 <p>Would the emotion give you thinks ?</p>
