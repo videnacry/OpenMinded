@@ -30,6 +30,7 @@ class PostController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * It returns an array parsed to string with author and post data
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

@@ -13,6 +13,7 @@ document.getElementById('close-post').addEventListener('click',function(){
     postModel.classList.add('hidden')
 })
 
+//-----------------Send post data to server to create post------------------
 document.getElementById('post-info').addEventListener('submit',function(e){
     e.preventDefault()
     let form = document.getElementById('post-info')
@@ -48,6 +49,7 @@ function createPost(protoClass
     return newPost;
 }
 
+//-----------------Show preview of the image going to post------------------
 document.getElementById('post-info').addEventListener('change',function(){
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -56,6 +58,7 @@ document.getElementById('post-info').addEventListener('change',function(){
     reader.readAsDataURL(document.getElementById('post-img').files[0]); 
 })
 
+//-----------------Show posts in profile from the user------------------
 axios.post('posts/username').then(function(res){
     for(let key in res.data.posts){
         let elem = res.data.posts[key]

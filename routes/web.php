@@ -32,7 +32,8 @@ Route::get('/wall', function(){
     return view('wall');
 });
 
-
+//-----------------Create and retrieve post------------------
 Route::post('posts',[PostController::class,'store']);
 
+//-----------------Get all posts from the user logged------------------
 Route::post('/posts/username', [PostController::class, 'getByUsername']);

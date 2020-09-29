@@ -50,7 +50,7 @@ class UserController extends Controller
     }
 
     /**
-     * Gets id by the username
+     * Gets user by the username
      * @param string $username
      */
     public function getByUsername(string $username){
