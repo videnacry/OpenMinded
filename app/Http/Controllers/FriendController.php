@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
 {
@@ -35,7 +36,15 @@ class FriendController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Friend::where('receiver',$request)){
+            $friendShip = new Friend;
+            $friendShip->sender = Auth::user()->id;
+            $friendShip->receiver = $request->id;
+            $friendShip->status = 'pending';
+            $friendShip->save();
+            return json_encode($friendship);
+        }
+        return 'You already sent a request';
     }
 
     /**
