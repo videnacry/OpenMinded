@@ -27,8 +27,10 @@ document.getElementById('post-info').addEventListener('submit',function(e){
         document.getElementById('post-img').value = ""
         document.getElementById("img-preview").src = "https://static.scientificamerican.com/blogs/cache/file/638FC5CE-96EC-46DA-AAC64985822092FE_source.jpg?w=590&h=800&BDB89ACC-71A2-463A-928419A181070C77"
         let postInfo = res.data
-        document.getElementById('publications').prepend(createPost('proto-post', undefined
-        , postInfo.content, postInfo.author, postInfo.authorImg))
+        let newPost = createPost('proto-post', undefined, postInfo.content, postInfo.author, postInfo.authorImg)
+        newPost.setAttribute('data-id', postInfo.id)
+        newPost.addEventListener('dblclick',like)
+        document.getElementById('publications').prepend(newPost)
     })
 })
 
@@ -66,6 +68,8 @@ axios.post('posts/username').then(function(res){
         let elem = res.data.posts[key]
         let author = res.data.user
         let post = createPost(undefined, undefined, elem.content, author.name, author.profile_photo_path)
+        post.addEventListener('dblclick',like)
+        post.setAttribute('data-id',elem.id)
         document.getElementById('publications').prepend(post)
     }
 })
@@ -96,4 +100,16 @@ function search(e){
 closeModal.onclick = function(e){
     e.currentTarget.classList.toggle('hidden')
     searcher.children[2].textContent = ""
+}
+
+
+
+
+//-----------------give like------------------
+function like(e){
+    let post = e.currentTarget
+    let data = {post_id:post.getAttribute('data-id')}
+    axios.post('likes/store', data).then(function(res){
+        console.log(res.data)
+    })
 }

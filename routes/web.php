@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,5 @@ Route::post('friends/store', [FriendController::class, 'store']);
 //-----------------Get posts as json------------------
 Route::post('posts/friends', [PostController::class, 'getFriends']);
 
-Route::get('u', [PostController::class, 'getFriends']);
+//-----------------insert like in post------------------
+Route::post('likes/store', [LikeController::class, 'store']);

@@ -79,13 +79,22 @@ function createPost(protoClass='proto-post'
 
 axios.post('posts/friends').then(function(res){
     let users = res.data
-    console.log(users)
     for(let key in users){
         for(let index in users[key].posts){
-            console.log()
             let friendPost = createPost(undefined, undefined, users[key].posts[index].content, users[key].name, users[key].profile_photo_path)
-            console.log(friendPost)
+            friendPost.addEventListener('dblclick', like)
+            friendPost.setAttribute('data-id', users[key].posts[index].id)
             document.getElementById('publications').prepend(friendPost)            
         }
     }
 })
+
+
+//-----------------give like------------------
+function like(e){
+    let post = e.currentTarget
+    let data = {post_id:post.getAttribute('data-id')}
+    axios.post('likes/store', data).then(function(res){
+        console.log(res.data)
+    })
+}

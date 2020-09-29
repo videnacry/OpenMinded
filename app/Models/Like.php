@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
-
+    
     protected $primaryKey = ['author', 'post'];
     public $incrementing = false;
+
+    public $fillable = ['author', 'post'];
 }

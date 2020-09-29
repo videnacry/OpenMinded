@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -35,7 +36,12 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->id;
+        if(count(Like::where('author', $userId)->where('post',$request->post_id)->get())>0){
+            return $this->count($request->post_id);
+        }
+        $like = Like::create(['author'=>$userId,'post'=>$request->post_id]);
+        return $this->count($request->post_id);
     }
 
     /**
@@ -81,5 +87,16 @@ class LikeController extends Controller
     public function destroy(Like $like)
     {
         //
+    }
+
+    /**
+     * Get count of likes.
+     *
+     * @param  int postId
+     * @return \Illuminate\Http\Response
+     */
+    public function count(int $postId)
+    {
+        return Like::where('post', $postId)->get()->count();
     }
 }
