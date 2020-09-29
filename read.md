@@ -84,8 +84,12 @@ let data={username:'videnacry', text:'I heard an emotion was a bunch of energy y
 axios.post('add_post',data,{headers:{'x-csrf-token':document.querySelector('meta[name="crsf_token"]').getAttribute('content')}})
 ```
 ### Jetstream profile images
-Jetstream upload the profile images inside **storage\app\public\profile-photos** so to access these photos you can **asset()** function but first you need to link this *storage* folder with *public* folder.
+Jetstream upload the profile images inside **storage\app\public\profile-photos** so to access these photos you can use **asset()** function but first you need to link this *storage* folder with *public* folder.
 ```php
 //This command would create a copy of storage folder inside public
 php artisan storage:link
+```
+So with this you could call the photo from the *.blade.php* file with *asset()*
+```php
+<img src="{{asset('storage/background.jpg'}}">
 ```

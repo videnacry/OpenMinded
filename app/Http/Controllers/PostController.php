@@ -59,11 +59,16 @@ class PostController extends Controller
      * Get the posts in a json of an user by its username
      * @param string $username
      */
-    public function postProfilePosts(string $username){
-        $userInstance = new UserController;
-        $userId = $userInstance->getIdByUsername($username);
-        $userPosts = Post::where('author', $userId)->get();
-        return json_encode($userPosts);
+    public function getByUsername(string $username = 'ñ'){
+        if($username == 'ñ'){
+            $user = Auth::user();
+        }else{
+            $userInstance = new UserController;
+            $user = $userInstance->getByUsername($username);
+        }
+        $userPosts = Post::where('author', $user->id)->get();
+        $user->profile_photo_path = asset('storage/'.$user->profile_photo_path);
+        return json_encode(['posts'=>$userPosts, 'user'=>$user]);
     }
 
     /**

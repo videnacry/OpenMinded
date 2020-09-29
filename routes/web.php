@@ -24,10 +24,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/profile', function(){return view('profile');});
+Route::get('/profile', [function(){return view('profile');}]);
+
+Route::resource('posts','PostController');
 
 Route::get('/wall', function(){
     return view('wall');
 });
 
-Route::post('/post/create', [PostController::class, 'store']);
+
+Route::post('posts',[PostController::class,'store']);
+
+Route::post('/posts/username', [PostController::class, 'getByUsername']);

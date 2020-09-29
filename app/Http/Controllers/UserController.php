@@ -53,8 +53,8 @@ class UserController extends Controller
      * Gets id by the username
      * @param string $username
      */
-    public function getIdByUsername(string $username){
-        return User::where('username', $username)->get()->first()->id;
+    public function getByUsername(string $username){
+        return User::where('username', $username)->get()->first();
     }
 
     /**
