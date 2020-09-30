@@ -58,3 +58,7 @@ Route::post('likes/store', [LikeController::class, 'store']);
 
 //-----------------insert comment in post------------------
 Route::post('comments/store', [CommentController::class, 'store']);
+
+//-----------------get comments from post------------------
+Route::post('comments/post', [CommentController::class, 'post']);
+Route::get('comments/post/{id}', [CommentController::class, 'pos']);

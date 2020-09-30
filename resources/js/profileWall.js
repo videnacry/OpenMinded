@@ -119,20 +119,56 @@ function like(e){
     })
 }
 
-//-------------------------------------------COMMENTS----------------------------------------------------
-let postId
+//----------------------------------------------COMMENTS----------------------------------------------
 let commentModal = document.getElementById('comment-modal')
+let commentSection = document.getElementById('comments')
+let postId
+
+/**
+ * Show comments of clicked post in a comment modal
+ */
 function comments(e){
+    commentSection.textContent = ""
     commentModal.style.backgroundImage = 'url("' + e.currentTarget.getElementsByTagName('img')[1].src + '")'
     commentModal.classList.toggle('hidden')
     postId = e.currentTarget.getAttribute('data-id')
+    let data = {post_id:postId}
+    axios.post('comments/post', data).then(function(res){
+        let comments = res.data
+        for(let key in comments){
+            let newComment = createComment(undefined, undefined, comments[key].content, comments[key].user.name + ' -> ')
+            commentSection.append(newComment)
+        }
+    }).then(()=>commentModal.children[0].scrollBy(0, commentModal.children[0].clientHeight))
 }
+
+function createComment(proto= 'proto-comment', user= false, content, author){
+    newComment = document.getElementsByClassName(proto)[0].cloneNode(true)
+    newComment.children[0].textContent = author
+    newComment.children[1].textContent = content
+    if(user){
+        newComment.classList.add('bg-green-100')
+        newComment.classList.remove('bg-pink-100')
+        newComment.children[0].classList.add('text-purple-700')
+        newComment.children[0].classList.remove('text-orange-500')
+    }
+    return newComment
+}
+
 document.getElementById('close-comment').onclick = ()=>commentModal.classList.toggle('hidden')
 document.getElementById('send-comment').addEventListener('click',sendComment)
+
+/**
+ * Send comment from input on comment modal
+ * @param {*} e 
+ */
 function sendComment(e){
     let postContent = document.getElementById('post-content').value
     let data = {post_id: postId, post_content: postContent}
     axios.post('comments/store', data).then(function(res){
-        console.log(res)
+        document.getElementById('post-content').value = ""
+        let comment = res.data.comment, user=res.data.user
+        let newComment = createComment(undefined, true, comment.content, user.name + ' -> ')
+        commentSection.append(newComment)
     })
 }

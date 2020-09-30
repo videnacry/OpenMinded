@@ -43,16 +43,27 @@ class CommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get comments from a post by id
      *
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function post(Request $request)
     {
-        //
+        $comments = Comment::where('post', $request->post_id)->get();
+        foreach($comments as $comment){
+            $comment->user = $comment->user;
+        }
+        return $comments;
     }
-
+    public function pos($request)
+    {
+        $comments = Comment::where('post', $request)->get();
+        foreach($comments as $comment){
+            $comment->user = $comment->user;
+        }
+        return $comments;
+    }
     /**
      * Show the form for editing the specified resource.
      *
