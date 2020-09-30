@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,6 @@ Route::post('posts/friends', [PostController::class, 'getFriends']);
 
 //-----------------insert like in post------------------
 Route::post('likes/store', [LikeController::class, 'store']);
+
+//-----------------insert comment in post------------------
+Route::post('comments/store', [CommentController::class, 'store']);

@@ -120,9 +120,19 @@ function like(e){
 }
 
 //-------------------------------------------COMMENTS----------------------------------------------------
+let postId
 let commentModal = document.getElementById('comment-modal')
 function comments(e){
     commentModal.style.backgroundImage = 'url("' + e.currentTarget.getElementsByTagName('img')[1].src + '")'
     commentModal.classList.toggle('hidden')
+    postId = e.currentTarget.getAttribute('data-id')
 }
 document.getElementById('close-comment').onclick = ()=>commentModal.classList.toggle('hidden')
+document.getElementById('send-comment').addEventListener('click',sendComment)
+function sendComment(e){
+    let postContent = document.getElementById('post-content').value
+    let data = {post_id: postId, post_content: postContent}
+    axios.post('comments/store', data).then(function(res){
+        console.log(res)
+    })
+}

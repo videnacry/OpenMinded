@@ -23,7 +23,7 @@
             x
         </span>
     </div>
-    <input class="my-5 h-6 ml-3 rounded-full text-xs border-solid border-2 border-gray-400 p-1 w-48 flex flex-col bg-gray-100 placeholder-gray-500" placeholder="What are you looking for ?">
-    <button class="my-5 h-6 ml-3 bg-blue-200 rounded-md border-blue-200 border-solid border-2 px-2">Comment</button>
+    <input id="post-content" class="my-5 h-6 ml-3 rounded-full text-xs border-solid border-2 border-gray-400 p-1 w-48 flex flex-col bg-gray-100 placeholder-gray-500" placeholder="What do you think about it ?">
+    <button id="send-comment" class="my-5 h-6 ml-3 bg-blue-300 shadow-outer rounded-md border-blue-200 border-solid border-2 px-2">Comment</button>
 </div>
 @endsection
