@@ -1,5 +1,5 @@
 ### laravel **schema** to manipulate **tables**
-´´´php
+```php
 //We can drop columns in a table
 Schema:table('posts', function(Blueprint $table){
     $table->dropColumn('summery');
@@ -13,7 +13,7 @@ Schema:table('posts', function(Blueprint $table){
 //Yes! you could do that, or....
 Schema:table('posts', function(Blueprint $table){
     //You must have in mind is not supported the rename of a table with a enum column
-    $table->renameColumn('users_id', 'user_id);
+    $table->renameColumn('users_id', 'user_id');
 })
 
 //Just remember to validate if the columns exists first!
@@ -27,7 +27,7 @@ if(Schema::hasColumn('posts', 'post_id')){
 
 //large way
 Schema::table('posts', function(Blueprint $table){
-    $table->unsignedBigInteger('user_id);
+    $table->unsignedBigInteger('user_id');
     $table->foreign('user_id')->references('id')->on('users');
 })
 
@@ -44,7 +44,18 @@ Schema::table('posts', function(Blueprint $table){
 })
 
 //
-´´´
+```
+
+* What happens if we want to update a foreign key constraint ?
+It can be solved erasing the constraint and then creating it again ! to do it use --dropForeign()-- method which takes the name of constraint or an array with the columns which form the foreign constraint. Remember the constraint has a name convention <table_name>_<column_name>_foreign.
+```php
+Schema::table('posts', function(Blueprint $table){
+    $table->dropForeign('posts_author_foreign');
+    $table->foreignId('author')->constrained('users')->onDelete('cascade');
+    
+    $table->dropForeign(['author'])
+})
+```
 ### Upload a file
 Upload a file with laravel is very easy, the html part is so similar to what we would have in a project without laravel, the only thing that would change is, here we add one line ! That is because Laravel has some security against ['CSRF'](), so the the *post* has a token wich must be declare in the *.blade.php* file, so you must put **@CSRF** inside the form you want to post.
 ```html
