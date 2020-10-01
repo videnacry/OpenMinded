@@ -7,6 +7,8 @@ let closeModal = document.getElementById('close-modal')
 
 let postModel = document.getElementById('post')
 
+let postId
+
 document.getElementById('newPost').addEventListener('click',function(){
     postModel.classList.remove('hidden')
 })
@@ -81,12 +83,21 @@ axios.post('posts/username').then(function(res){
 
 let postMenu = document.getElementById('post-menu')
 function showOptions(e){
-    e.preventDefault
+    e.preventDefault()
+    postId = e.currentTarget.getAttribute('data-id')
     if(postMenu.classList.contains('hidden')){
         postMenu.classList.toggle('hidden')
     }
     postMenu.style.top = e.pageY + "px"
     postMenu.style.left = e.screenX + "px"
+}
+
+document.getElementById('post-delete').onclick = function(e){
+    axios.delete('posts/delete/'+postId).then(function(res){
+        if(res.data == 'deleted'){
+            document.querySelector('div[data-id="'+postId+'"]').remove()
+        }
+    })
 }
 
 //----------------------------Searcher-------------------------------------
@@ -135,7 +146,6 @@ function like(e){
 //----------------------------------------------COMMENTS----------------------------------------------
 let commentModal = document.getElementById('comment-modal')
 let commentSection = document.getElementById('comments')
-let postId
 
 /**
  * Show comments of clicked post in a comment modal
