@@ -9,20 +9,25 @@ let postModel = document.getElementById('post')
 
 let postId
 
+let selectedPost
+
+postForm = document.getElementById('post-info')
+
 document.getElementById('newPost').addEventListener('click',function(){
     postModel.classList.remove('hidden')
 })
 
 document.getElementById('close-post').addEventListener('click',function(){
     postModel.classList.add('hidden')
+    postForm.onsubmit = insertPost
 })
 
 //-----------------Send post data to server to create post------------------
-document.getElementById('post-info').addEventListener('submit',function(e){
+postForm.onsubmit=insertPost
+
+function insertPost(e){
     e.preventDefault()
-    let form = document.getElementById('post-info')
-    let formData = new FormData(form)
-    console.log(e.currentTarget);
+    let formData = new FormData(postForm)
     axios.post('posts', formData).then(function(res){
         postModel.classList.add('hidden')
         document.getElementById('post-text').value = ""
@@ -34,7 +39,7 @@ document.getElementById('post-info').addEventListener('submit',function(e){
         newPost.addEventListener('dblclick',like)
         document.getElementById('publications').prepend(newPost)
     })
-})
+}
 
 /**
  * Clones a post by class, fill it with new data and return it
@@ -56,7 +61,7 @@ function createPost(protoClass='proto-post'
 }
 
 //-----------------Show preview of the image going to post------------------
-document.getElementById('post-info').addEventListener('change',function(){
+postForm.addEventListener('change',function(){
     var reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById("img-preview").setAttribute("src", e.target.result);
@@ -85,6 +90,7 @@ let postMenu = document.getElementById('post-menu')
 function showOptions(e){
     e.preventDefault()
     postId = e.currentTarget.getAttribute('data-id')
+    selectedPost = e.currentTarget
     if(postMenu.classList.contains('hidden')){
         postMenu.classList.toggle('hidden')
     }
@@ -95,9 +101,28 @@ function showOptions(e){
 document.getElementById('post-delete').onclick = function(e){
     axios.delete('posts/delete/'+postId).then(function(res){
         if(res.data == 'deleted'){
-            document.querySelector('div[data-id="'+postId+'"]').remove()
+            selectedPost.remove()
         }
     })
+}
+
+document.getElementById('post-edit').onclick = function(e){
+    if(postModel.classList.contains('hidden')){
+        postModel.classList.remove('hidden')
+    }
+    postModel.getElementsByTagName('img')[1].src = selectedPost.getElementsByTagName('img')[1].src
+    postForm.getElementsByTagName('textarea')[0].value = selectedPost.getElementsByTagName('p')[0].textContent
+    postForm.onsubmit = (e)=>{
+        e.preventDefault()
+        let data = new FormData(postForm)
+        axios.post('posts/update/' + postId, data).then(function(res){
+            selectedPost.getElementsByTagName('p')[0].textContent = res.data.content
+            //selectedPost.getElementsByTagName('img')[1].src = res.data.photo
+        }).finally(function(){
+            postForm.onsubmit = insertPost
+            postModel.classList.add('hidden')
+        })
+    }
 }
 
 //----------------------------Searcher-------------------------------------

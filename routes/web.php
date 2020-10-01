@@ -62,5 +62,8 @@ Route::post('comments/store', [CommentController::class, 'store']);
 //-----------------delete post by id------------------
 Route::delete('posts/delete/{id}', [PostController::class, 'destroy']);
 
+//-----------------update post by id------------------
+Route::post('posts/update/{id}', [PostController::class, 'update']);
+
 //-----------------get comments from post------------------
 Route::post('comments/post', [CommentController::class, 'post']);
