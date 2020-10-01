@@ -1,8 +1,8 @@
 @extends('master')
 
-@include('wall.post')
+@include('assets.post')
 @include('wall.header')
-@include('wall.publication')
+@include('assets.publication')
 
 @section('style')
     <!-- Post css -->

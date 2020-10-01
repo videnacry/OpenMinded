@@ -70,11 +70,24 @@ axios.post('posts/username').then(function(res){
         let post = createPost(undefined, undefined, elem.content, author.name, author.profile_photo_path)
         post.addEventListener('dblclick',like)
         post.addEventListener('click', comments)
+        post.addEventListener('contextmenu', showOptions)
         post.setAttribute('data-id',elem.id)
         post.getElementsByTagName('span')[0].textContent = elem.likes_count
         document.getElementById('publications').prepend(post)
     }
 })
+
+//-----------------Show post contextmenu------------------
+
+let postMenu = document.getElementById('post-menu')
+function showOptions(e){
+    e.preventDefault
+    if(postMenu.classList.contains('hidden')){
+        postMenu.classList.toggle('hidden')
+    }
+    postMenu.style.top = e.pageY + "px"
+    postMenu.style.left = e.screenX + "px"
+}
 
 //----------------------------Searcher-------------------------------------
 let searcher = document.getElementById('searcher')

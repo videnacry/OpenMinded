@@ -2,8 +2,9 @@
 
 @include('user.header')
 @include('user.summery')
-@include('wall.publication')
-@include('wall.post')
+@include('assets.publication')
+@include('assets.post')
+@include('assets.postOptions')
 
 @section('style')
     <style>
@@ -26,6 +27,7 @@
     @yield('summery-content')
     @yield('publication-content')
     @yield('post-content')
+    @yield('postOptions-content')
 @endsection
 
 @section('content-script')
